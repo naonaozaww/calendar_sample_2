@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_20_083255) do
+ActiveRecord::Schema.define(version: 2021_05_21_071355) do
 
   create_table "boards", force: :cascade do |t|
     t.datetime "start_date", null: false
@@ -20,12 +20,15 @@ ActiveRecord::Schema.define(version: 2021_05_20_083255) do
   end
 
   create_table "events", force: :cascade do |t|
-    t.string "title"
-    t.string "body"
-    t.datetime "start_date"
-    t.datetime "end_date"
+    t.datetime "start_at", null: false
+    t.datetime "end_at", null: false
+    t.integer "week_number"
+    t.integer "board_id", null: false
+    t.integer "mode_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["board_id"], name: "index_events_on_board_id"
+    t.index ["mode_id"], name: "index_events_on_mode_id"
   end
 
 end
